@@ -8,7 +8,7 @@
 我的模型仓库地址：[SeiaDetectModel](https://github.com/orchidsziyou/SeiaDetectModel)
 
 ## 依赖
-本插件使用了Aiocqhttp当中的内容，仅测试过Napcat，建议使用了Napcat的用户安装.
+本插件使用了Aiocqhttp当中的内容，仅测试过Napcat，建议使用了Napcat的用户安装.  
 本插件使用了onnxruntime库，请确保系统中已安装onnxruntime库。  
 参考requirements.txt文件安装依赖库。
 

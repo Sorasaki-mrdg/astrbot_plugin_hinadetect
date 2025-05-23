@@ -9,7 +9,7 @@ import cv2
 from astrbot.core.message.components import Plain, Reply
 from astrbot.core.star.filter.event_message_type import EventMessageType
 
-device = 'cpu'
+device = 'cpu'  # 本人服务器配置的是cpu，若有gpu，可以改为'cuda'
 global ort_session
 
 
@@ -22,9 +22,8 @@ def load_model():
 
 # 图像预处理（使用 OpenCV）
 def preprocess_image(image_path):
-    # 使用 OpenCV 读取图像并转换为 RGB 格式
     image = cv2.imread(image_path)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # OpenCV 读取的是 BGR，转换为 RGB
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = cv2.resize(image, (224, 224))  # 根据模型要求调整图像大小
     image = image.astype(np.float32) / 255.0  # 将像素值归一化到 [0, 1] 范围
 
@@ -40,7 +39,6 @@ def preprocess_image(image_path):
     return image
 
 
-# 处理用户输入的图像路径并进行推理
 def predict_image(image_path):
     # 预处理图像
     image = preprocess_image(image_path)
@@ -52,9 +50,9 @@ def predict_image(image_path):
     ort_inputs = {input_name: image}
     ort_outs = ort_session.run(None, ort_inputs)
     print(ort_outs)
-    # 使用 argmax 获取最大值所在的位置（即预测的类别）
+    # 使用 argmax 获取最大值所在的位置
     pred = np.argmax(ort_outs[0], axis=1)
-    return (pred.item() == 1,ort_outs[0][0][1])
+    return pred.item() == 1, ort_outs[0][0][1]
 
 
 @register("SeiaDetect", "orchidsziyou", "检测发送的图片是不是Seia", "1.0.0")
@@ -81,17 +79,17 @@ class MyPlugin(Star):
                 response = await client.api.call_action('get_image', **payloads2)
                 # print(response)
                 image_path = response['file']
-                str_path= str(image_path)
+                str_path = str(image_path)
                 if str_path.endswith('.gif'):
                     return
                 if "Emoji" in str_path:
                     return
                 if os.path.exists(image_path):
                     try:
-                        result,prob = predict_image(image_path)
+                        result, prob = predict_image(image_path)
                         print(result)
                         if result:
-                            if prob>0.7:
+                            if prob > 0.7:  # 可以修改阈值
                                 message_chain = [
                                     Reply(id=event.message_obj.message_id),
                                     Plain("老婆")
@@ -101,7 +99,7 @@ class MyPlugin(Star):
                                     Reply(id=event.message_obj.message_id),
                                     Plain("可能是我老婆")
                                 ]
-                            
+
                             yield event.chain_result(message_chain)
                         else:
                             return
