@@ -62,13 +62,17 @@ class MyPlugin(Star):
         load_model()
 
     @filter.event_message_type(EventMessageType.ALL)
-    async def detect_nailong(self, event: AstrMessageEvent):
+    async def detect_seia(self, event: AstrMessageEvent):
         # obj=event.message_obj
         message_chain = event.get_messages()
         if len(message_chain) == 1:
             # print(message_chain[0])
             if message_chain[0].type == "Image":
                 image_filename = message_chain[0].file
+                image_url=message_chain[0].url
+                if "/club/item/" in image_url:
+                    print("跳过qq官方表情")
+                    return
                 from astrbot.core.platform.sources.aiocqhttp.aiocqhttp_message_event import \
                     AiocqhttpMessageEvent
                 assert isinstance(event, AiocqhttpMessageEvent)

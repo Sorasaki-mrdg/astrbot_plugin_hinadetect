@@ -31,6 +31,9 @@
 如果想要训练自己的模型，可以参考[spawner1145](https://github.com/spawner1145)的仓库[NailongRecognizeRL](https://github.com/spawner1145/NailongRecognizeRL)进行训练，也可以使用我那个仓库来训练。  
 若使用我那个仓库来训练，只需要把数据集当中正样本放到train_positive当中，负样本放到train_negative当中，然后运行train01.py文件即可。把您训练好的模型放到本插件的目录下替换好文件名字即可。
 
+# 更新：
+2025/6/3 添加排除掉qq官方表情，否则会出错
+
 ## 运行截图
 ![img.png](img.png)
 
