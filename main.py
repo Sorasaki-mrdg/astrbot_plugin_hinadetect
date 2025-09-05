@@ -16,7 +16,7 @@ global ort_session
 def load_model():
     # 加载 ONNX 模型
     global ort_session
-    onnx_model_path = './data/plugins/astrbot_plugin_seiadetect/best_seia_model.onnx'
+    onnx_model_path = './data/plugins/astrbot_plugin_hinadetect/best_hina_model.onnx'
     ort_session = ort.InferenceSession(onnx_model_path)
 
 
@@ -124,7 +124,7 @@ def predict_image(image_path):
     return pred.item() == 1, ort_outs[0][0][1]
 
 
-@register("SeiaDetect", "orchidsziyou", "检测发送的图片是不是Seia", "1.0.0")
+@register("HinaDetect", "orchidsziyou", "检测发送的图片是不是Hina", "1.0.0")
 class MyPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
@@ -183,9 +183,9 @@ class MyPlugin(Star):
                 else:
                     pass
 
-    @filter.command("searchseia", "搜索老婆")
+    @filter.command("searchhina", "搜索老婆")
     async def search_seia(self, event: AstrMessageEvent, row: int = 2, col: int = 2):
-        ''' 这是一个 searchseia 命令，用于搜索图片是否包括圣娅'''
+        ''' 这是一个 searchhina 命令，用于搜索图片是否包括日奈'''
 
         if row <= 0 or col <= 0:
             yield event.plain_result("参数错误")
@@ -256,7 +256,7 @@ class MyPlugin(Star):
                                     Reply(id=reply_id),
                                     Plain("老婆")
                                 ]
-                            else:
+                            elif prob > 0:
                                 message_chain = [
                                     Reply(id=reply_id),
                                     Plain("可能是我老婆")
