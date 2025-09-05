@@ -49,9 +49,9 @@ Hina模型仓库地址：[HinaDetect](https://github.com/Sorasaki-mrdg/astrbot_p
 2025/9/5 添加功能 /searchhina a b  把图片分割成a*b块，然后检测每块图片是否有hina，并返回结果。  
 
 ## 运行截图
-![img.jpg](img.jpg)
+![img.jpg](img.jpg)  
 
-![img_1.jpg](img_1.jpg)
+![img_1.jpg](img_1.jpg)  
 没检测到的情况(无回应)  
 ![img_2.jpg](img_2.jpg)
 
