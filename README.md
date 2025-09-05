@@ -7,7 +7,7 @@
 模型是我参考[spawner1145](https://github.com/spawner1145)的仓库[NailongRecognizeRL](https://github.com/spawner1145/NailongRecognizeRL)训练而来，使用了超过300张Seia的图片以及1k+张由我的QQbot接受到的各种图片训练而来。  
 在训练过程中，由于数据集问题，我把搜集到的Seia的图片均左旋转，上下翻转并且作为数据集拿去训练。在我个人部署到自己的bot这段时间内，检测效果还可以。  
 上游模型仓库地址：[SeiaDetectModel](https://github.com/orchidsziyou/SeiaDetectModel)
-上游模型仓库地址：[HinaDetect](https://github.com/Sorasaki-mrdg/astrbot_plugin_hinadetect)
+Hina模型仓库地址：[HinaDetect](https://github.com/Sorasaki-mrdg/astrbot_plugin_hinadetect)
 
 ## 依赖
 本插件使用了Aiocqhttp当中的内容，仅测试过Napcat，建议使用了Napcat的用户安装.  
